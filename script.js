@@ -124,6 +124,9 @@ function playGame(playerChoice){
     } else {
         updateScore(outcome);
         roundsLeft.textContent = roundsLeft.textContent - 1;
+        let computerChoiceMessage = document.createElement('p');
+        computerChoiceMessage.textContent = `You chose ${playerChoice}. The computer chose ${computerChoice}!`
+        container.appendChild(computerChoiceMessage)
     }
 }
 
@@ -133,9 +136,18 @@ const roundsLeft = document.querySelector(".roundsLeft");
 const gameState = document.querySelector(".roundsContainer")
 
 btn.addEventListener('click', function() {
-    let rockButton = createButton("Rock");
-    let scissorsButton = createButton("Scissors");
-    let paperButton = createButton("Paper");
+    let rockButton = document.createElement('input');
+    rockButton.setAttribute("type","image");
+    rockButton.src = "rock.png";
+    rockButton.id = "rock";
+    let scissorsButton = document.createElement('input');
+    scissorsButton.setAttribute("type","image");
+    scissorsButton.src = "scissors.png";
+    scissorsButton.id = "scissors"
+    let paperButton = document.createElement('input');
+    paperButton.setAttribute("type","image");
+    paperButton.src = "paper.png";
+    paperButton.id = "paper";
     
     container.appendChild(rockButton);
     container.appendChild(scissorsButton);
@@ -153,6 +165,17 @@ btn.addEventListener('click', function() {
         let playerChoice = this.id;
         playGame(playerChoice);
     })
+
+    paper.addEventListener('click', function(){
+        let playerChoice = this.id;
+        playGame(playerChoice);
+    })
+
+    scissors.addEventListener('click', function(){
+        let playerChoice = this.id;
+        playGame(playerChoice);
+    })
+
 })
 
 function createButton(buttonName) {

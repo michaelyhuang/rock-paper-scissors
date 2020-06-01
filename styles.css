@@ -5,7 +5,6 @@
     height: 10vh;
     width: 40vh;
     margin: auto;
-    margin-top: 20px;
     border-radius: 4px;
     font-size: 18px;
 }
@@ -34,6 +33,28 @@ button {
     font-family: "Times New Roman", Times, serif;
 }
 
-choiceButton {
-    
+#rock {
+    width: 20%;
+}
+
+#paper {
+    width: 20%;
+
+}
+
+#scissors{
+    width: 20%;
+    margin: auto;
+}
+
+input:hover{
+    border: solid;
+    border-radius:8px;
+}
+
+.gameContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
 }
