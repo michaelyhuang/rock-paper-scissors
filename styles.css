@@ -27,6 +27,7 @@ h2 {
     list-style: none;
     width: 50%;
     text-align: center;
+    font-size: 50px;
 }
 
 button {
@@ -35,16 +36,20 @@ button {
 
 #rock {
     width: 20%;
+    height: 10vh;
+    width: auto;
 }
 
 #paper {
     width: 20%;
-
+    height: 10vh;
+    width: auto;
 }
 
 #scissors{
     width: 20%;
-    margin: auto;
+    height: 10vh;
+    width: auto;
 }
 
 input:hover{
@@ -55,6 +60,10 @@ input:hover{
 .gameContainer{
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     margin-top: 50px;
+}
+
+.messages{
+    text-align: center;
+    margin: 20vh;
 }

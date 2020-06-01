@@ -121,12 +121,15 @@ function playGame(playerChoice){
 
     if (roundsLeft.textContent === '1'){
         endGame(outcome);
+        let computerChoiceMessage = document.createElement('p');
+        computerChoiceMessage.textContent = `You chose ${playerChoice}. The computer chose ${computerChoice}!`
+        messageContainer.appendChild(computerChoiceMessage)
     } else {
         updateScore(outcome);
         roundsLeft.textContent = roundsLeft.textContent - 1;
         let computerChoiceMessage = document.createElement('p');
         computerChoiceMessage.textContent = `You chose ${playerChoice}. The computer chose ${computerChoice}!`
-        container.appendChild(computerChoiceMessage)
+        messageContainer.appendChild(computerChoiceMessage)
     }
 }
 
@@ -134,6 +137,7 @@ const container = document.querySelector(".gameContainer")
 const btn = document.querySelector(".start")
 const roundsLeft = document.querySelector(".roundsLeft");
 const gameState = document.querySelector(".roundsContainer")
+const messageContainer = document.querySelector(".messages")
 
 btn.addEventListener('click', function() {
     let rockButton = document.createElement('input');
@@ -156,6 +160,9 @@ btn.addEventListener('click', function() {
 
     resetScore();
     roundsLeft.textContent = 5;
+    messageContainer.innerHTML = '';
+    gameState.textContent = "Rounds Left: ";
+    gameState.appendChild(roundsLeft);
 
     const rock = document.querySelector("#rock");
     const paper = document.querySelector("#paper");
