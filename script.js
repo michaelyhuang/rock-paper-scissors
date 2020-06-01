@@ -82,6 +82,15 @@ function updateScore(gameResult){
     }
 }
 
+function resetScore(){
+    let playerScoreContainer = document.querySelector(".playerScore");
+    let computerScoreContainer = document.querySelector(".computerScore");
+    let playerScore = Number(playerScoreContainer.textContent);
+    let computerScore = Number(computerScoreContainer.textContent);
+    playerScoreContainer.textContent = 0;
+    computerScoreContainer.textContent = 0;
+}
+
 function endGame(outcome){
     // Update score
     updateScore(outcome);
@@ -89,23 +98,40 @@ function endGame(outcome){
     let computerScoreContainer = document.querySelector(".computerScore");
     let playerScore = Number(playerScoreContainer.textContent);
     let computerScore = Number(computerScoreContainer.textContent);
-    // Determine winner based on score element
+    // Determine winner based on score element and print message
     if (playerScore > computerScore){
-        console.log("WIN");
+        gameState.textContent = "You won!";
     } else if (playerScore < computerScore){
-        console.log("LOSE");
+        gameState.textContent = "You lost!";
     } else {
-        console.log("TIE");
+        gameState.textContent = "You tied!";
     }
-    // Print a message
     // Remove RPS buttons and replace with "Play Again" button
+    let playAgainButton = btn;
+    playAgainButton.textContent = "Play Again"
+    container.innerHTML = '';
+    container.appendChild(playAgainButton);
 }
 
+function playGame(playerChoice){
+    let computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    let outcome = playRound(playerChoice, computerChoice);
+    console.log(outcome);
+    console.log(roundsLeft.textContent);
 
-
+    if (roundsLeft.textContent === '1'){
+        endGame(outcome);
+    } else {
+        updateScore(outcome);
+        roundsLeft.textContent = roundsLeft.textContent - 1;
+    }
+}
 
 const container = document.querySelector(".gameContainer")
 const btn = document.querySelector(".start")
+const roundsLeft = document.querySelector(".roundsLeft");
+const gameState = document.querySelector(".roundsContainer")
+
 btn.addEventListener('click', function() {
     let rockButton = createButton("Rock");
     let scissorsButton = createButton("Scissors");
@@ -116,26 +142,16 @@ btn.addEventListener('click', function() {
     container.appendChild(paperButton);
     container.removeChild(btn);
 
+    resetScore();
+    roundsLeft.textContent = 5;
+
     const rock = document.querySelector("#rock");
     const paper = document.querySelector("#paper");
     const scissors = document.querySelector("#scissors");
     
-    let roundsLeft = document.querySelector(".roundsLeft");
-
     rock.addEventListener('click', function(){
         let playerChoice = this.id;
-        let computerChoice = choices[Math.floor(Math.random() * choices.length)];
-        let outcome = playRound(playerChoice, computerChoice);
-        console.log(outcome);
-        console.log(roundsLeft.textContent);
-
-        if (roundsLeft.textContent === '1'){
-            endGame(outcome);
-        } else {
-            updateScore(outcome);
-            roundsLeft.textContent = roundsLeft.textContent - 1;
-        }
-
+        playGame(playerChoice);
     })
 })
 
