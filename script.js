@@ -27,11 +27,11 @@ function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     if (playerSelection === computerSelection){
-        return(`It's a tie! Both players threw ${playerSelection}`);
+        return(`tie`);
     } else if (playerWins(playerSelection, computerSelection)){
-        return(`You win! ${playerSelection} beats ${computerSelection}`);
+        return(`win`);
     } else {
-        return(`You lose! ${computerSelection} beats ${playerSelection}`);
+        return(`lose`);
     }
 }
 
@@ -60,6 +60,50 @@ function printResult(playerScore, computerScore){
     }
 }
 
+
+function updateScore(gameResult){
+    // Update the score element
+    let playerScoreContainer = document.querySelector(".playerScore");
+    let computerScoreContainer = document.querySelector(".computerScore");
+    let playerScore = Number(playerScoreContainer.textContent);
+    let computerScore = Number(computerScoreContainer.textContent);
+    switch(gameResult) {
+        case "tie":
+        playerScoreContainer.textContent = playerScore + 0.5;
+        computerScoreContainer.textContent = computerScore + 0.5;
+        break;
+        case "win":
+        playerScoreContainer.textContent = playerScore + 1;
+        break;
+        case "lose":
+        console.log(computerScore);
+        computerScoreContainer.textContent = computerScore + 1;
+        break;
+    }
+}
+
+function endGame(outcome){
+    // Update score
+    updateScore(outcome);
+    let playerScoreContainer = document.querySelector(".playerScore");
+    let computerScoreContainer = document.querySelector(".computerScore");
+    let playerScore = Number(playerScoreContainer.textContent);
+    let computerScore = Number(computerScoreContainer.textContent);
+    // Determine winner based on score element
+    if (playerScore > computerScore){
+        console.log("WIN");
+    } else if (playerScore < computerScore){
+        console.log("LOSE");
+    } else {
+        console.log("TIE");
+    }
+    // Print a message
+    // Remove RPS buttons and replace with "Play Again" button
+}
+
+
+
+
 const container = document.querySelector(".gameContainer")
 const btn = document.querySelector(".start")
 btn.addEventListener('click', function() {
@@ -76,20 +120,20 @@ btn.addEventListener('click', function() {
     const paper = document.querySelector("#paper");
     const scissors = document.querySelector("#scissors");
     
-    let roundInfo = document.querySelector("#roundsLeft");
-    let roundsLeft =  roundInfo.textContent;
+    let roundsLeft = document.querySelector(".roundsLeft");
 
     rock.addEventListener('click', function(){
         let playerChoice = this.id;
         let computerChoice = choices[Math.floor(Math.random() * choices.length)];
         let outcome = playRound(playerChoice, computerChoice);
         console.log(outcome);
-        
-        if (roundsLeft === 1){
-            endGame();
+        console.log(roundsLeft.textContent);
+
+        if (roundsLeft.textContent === '1'){
+            endGame(outcome);
         } else {
             updateScore(outcome);
-            updateRounds();
+            roundsLeft.textContent = roundsLeft.textContent - 1;
         }
 
     })
