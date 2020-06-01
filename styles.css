@@ -1,0 +1,36 @@
+.start {
+    display: block;
+    border-style: none;
+    background-color: rgb(241, 241, 241);
+    height: 10vh;
+    width: 40vh;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+h1{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+h2 {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.gameInfo {
+    margin: auto;
+    list-style: none;
+    width: 50%;
+    text-align: center;
+}
+
+button {
+    font-family: "Times New Roman", Times, serif;
+}
+
